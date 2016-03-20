@@ -1,0 +1,42 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+version = '1.0'
+
+allprojects {
+    apply plugin:'idea'
+
+    repositories {
+        mavenLocal()
+        maven { url 'http://maven.oschina.net/content/groups/public/' }
+        mavenCentral()
+    }
+
+    ext {
+        compileJava.options.encoding = 'UTF-8'
+        compileTestJava.options.encoding = 'UTF-8'
+        templateDir = './profiles'
+        resourcePath = '/src/main/resources'
+    }
+}
+
+subprojects {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    ext {
+        springVersion = '4.1.6.RELEASE'
+        log4jVersion = '1.7.6'
+        slf4jVersion = '1.6.1'
+        freemarkerVersion = '2.3.22'
+        springSecurityVersion = '3.2.5.RELEASE'
+        jxmppVersion = '0.5.0-alpha6'
+        smackMinAndroidSdk = 22
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
